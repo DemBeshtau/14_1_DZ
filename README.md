@@ -62,7 +62,7 @@ root@monitoring:~# systemctl status prometheus-node-exporter
              └─611 /usr/bin/prometheus-node-exporter
 ...
 ```
-3. Установка на ВМ пакета Grafana:
+3. Установка на ВМ пакета Grafana:<br/>
 ```shell
 root@monitoring:~# dpkg -i grafana_10.2.2_amd64.deb
 ...
@@ -83,4 +83,15 @@ root@monitoring:~# systemctl status grafana-server
         CPU: 2.925s
      CGroup: /system.slice/grafana-server.service
 ...
+```
+4. Проверка портов, прослушиваемых установленными сервисами:<br/>
+```shell
+root@monitoring:/# ss -ntlp
+State        Recv-Q       Send-Q              Local Address:Port               Peer Address:Port       Process                                          
+LISTEN       0            4096                127.0.0.53%lo:53                      0.0.0.0:*           users:(("systemd-resolve",pid=563,fd=14))       
+LISTEN       0            128                       0.0.0.0:22                      0.0.0.0:*           users:(("sshd",pid=683,fd=3))                   
+LISTEN       0            4096                            *:9090                          *:*           users:(("prometheus",pid=612,fd=8))             
+LISTEN       0            4096                            *:9100                          *:*           users:(("prometheus-node",pid=611,fd=3))        
+LISTEN       0            128                          [::]:22                         [::]:*           users:(("sshd",pid=683,fd=4))                   
+LISTEN       0            4096                            *:3000                          *:*           users:(("grafana",pid=603,fd=13))         
 ```
