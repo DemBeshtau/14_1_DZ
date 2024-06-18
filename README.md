@@ -62,3 +62,25 @@ root@monitoring:~# systemctl status prometheus-node-exporter
              └─611 /usr/bin/prometheus-node-exporter
 ...
 ```
+3. Установка на ВМ пакета Grafana:
+```shell
+root@monitoring:~# dpkg -i grafana_10.2.2_amd64.deb
+...
+root@monitoring:~# systemctl enable --now grafana-server
+
+root@monitoring:~# apt list installed grafana
+Listing... Done
+grafana/now 10.2.2 amd64 [installed,local]
+
+root@monitoring:~# systemctl status grafana-server 
+● grafana-server.service - Grafana instance
+     Loaded: loaded (/lib/systemd/system/grafana-server.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2024-06-18 14:46:40 UTC; 19min ago
+       Docs: http://docs.grafana.org
+   Main PID: 603 (grafana)
+      Tasks: 12 (limit: 2309)
+     Memory: 186.9M
+        CPU: 2.925s
+     CGroup: /system.slice/grafana-server.service
+...
+```
