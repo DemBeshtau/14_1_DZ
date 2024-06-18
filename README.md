@@ -95,3 +95,5 @@ LISTEN       0            4096                            *:9100                
 LISTEN       0            128                          [::]:22                         [::]:*           users:(("sshd",pid=683,fd=4))                   
 LISTEN       0            4096                            *:3000                          *:*           users:(("grafana",pid=603,fd=13))         
 ```
+5. Демонстрация работы дашбордов в Grafana после настройки данного сервиса:<br/>
+![изображение](https://github.com/DemBeshtau/14_1_DZ/assets/149678567/18b461eb-ade7-4871-89e2-3328a7a7a0cb)
