@@ -12,7 +12,7 @@
 &ensp;&ensp;&ensp;Все действия проводились с использованием Vagrant 2.4.0, VirtualBox 7.0.14 и образа<br/> 
 &ensp;&ensp;ubuntu/jammy64 версии 20240301.0.0.<br/> 
 ### Ход решения ###
-1. Установка на ВМ Prometheus:
+1. Установка на ВМ Prometheus:<br/>
 ```shell
 root@monitoring:~# apt update
 ...
@@ -37,5 +37,28 @@ root@monitoring:~# systemctl status prometheus
         CPU: 605ms
      CGroup: /system.slice/prometheus.service
              └─612 /usr/bin/prometheus
+...
+```
+2. Установка на ВМ агента (экспортера) Prometheus:<br/>
+```shell
+root@monitoring:~# apt install -y prometheus-node-exporter
+...
+
+root@monitoring:~# apt list installed prometheus-node-exporter
+Listing... Done
+prometheus-node-exporter/jammy-updates,jammy-security,now 1.3.1-1ubuntu0.22.04.2 amd64 [installed,automatic]
+N: There is 1 additional version. Please use the '-a' switch to see it
+
+root@monitoring:~# systemctl status prometheus-node-exporter
+● prometheus-node-exporter.service - Prometheus exporter for machine metrics
+     Loaded: loaded (/lib/systemd/system/prometheus-node-exporter.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2024-06-18 14:46:40 UTC; 6min ago
+       Docs: https://github.com/prometheus/node_exporter
+   Main PID: 611 (prometheus-node)
+      Tasks: 7 (limit: 2309)
+     Memory: 19.9M
+        CPU: 827ms
+     CGroup: /system.slice/prometheus-node-exporter.service
+             └─611 /usr/bin/prometheus-node-exporter
 ...
 ```
